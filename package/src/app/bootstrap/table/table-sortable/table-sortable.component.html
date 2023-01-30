@@ -126,6 +126,15 @@
           <li class="nav-item" ngbNavItem="posts"><a href="#my-posts" data-toggle="tab" class="nav-link" ngbNavLink>Tổng
               quan</a>
             <ng-template ngbNavContent>
+              <div class="card-body">
+                <app-sym-general></app-sym-general>
+              </div>
+            </ng-template>
+
+          </li>
+          <li class="nav-item" ngbNavItem="about-me"><a href="#about-me" data-toggle="tab" class="nav-link"
+              ngbNavLink>Biểu đồ</a>
+            <ng-template ngbNavContent>
               {{listChartData[0]?.symbol}}
               {{listChartData[0]?.s}}
               {{listChartData[0]?.h}}
@@ -133,20 +142,16 @@
               {{listChartData[0]?.o}}
               {{listChartData[0]?.t}}
               {{listChartData[0]?.v}}
-            </ng-template>
-
-          </li>
-          <li class="nav-item" ngbNavItem="about-me"><a href="#about-me" data-toggle="tab" class="nav-link"
-              ngbNavLink>Biểu đồ</a>
-            <ng-template ngbNavContent>
-              tab 2
+              <div class="card-body">
+                <app-sym-candlechart></app-sym-candlechart>
+              </div>
             </ng-template>
 
           </li>
           <li class="nav-item" ngbNavItem="profile-settings"><a href="#profile-settings" data-toggle="tab"
               class="nav-link" ngbNavLink>Tài chính</a>
             <ng-template ngbNavContent>
-              tab 3
+              <app-sym-finance></app-sym-finance>
             </ng-template>
           </li>
         </ul>

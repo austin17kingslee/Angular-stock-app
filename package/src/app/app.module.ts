@@ -714,6 +714,9 @@ import {
   APP_INITIALIZER,
   CUSTOM_ELEMENTS_SCHEMA
 } from '@angular/core';
+import { SymGeneralComponent } from './bootstrap/table/table-sortable/sym-general/sym-general.component';
+import { SymCandlechartComponent } from './bootstrap/table/table-sortable/sym-candlechart/sym-candlechart.component';
+import { SymFinanceComponent } from './bootstrap/table/table-sortable/sym-finance/sym-finance.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -1354,6 +1357,9 @@ export function configServiceFactory(config: AppConfigService) {
 	Error404Component,
 	Error500Component,
 	Error503Component,
+ SymGeneralComponent,
+ SymCandlechartComponent,
+ SymFinanceComponent,
 
 
   ],
