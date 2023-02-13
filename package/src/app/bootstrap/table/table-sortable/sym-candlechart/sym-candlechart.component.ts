@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-sym-candlechart',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sym-candlechart.component.css']
 })
 export class SymCandlechartComponent implements OnInit {
+  @Input() listChartData = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.listChartData);
   }
 
 }
