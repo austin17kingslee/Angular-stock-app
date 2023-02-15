@@ -24,7 +24,7 @@ export type ChartOptions = {
   styleUrls: ['./sym-candlechart.component.css']
 })
 export class SymCandlechartComponent implements OnInit {
-  @Input() listChartData = [];
+  @Input() listChartData: any = [];
 
   @ViewChild("chart") chart!: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
@@ -333,13 +333,14 @@ export class SymCandlechartComponent implements OnInit {
 
   initCandleChart() {
     const xCategories = [];
-    this.listChartData.forEach(el => {
+    this.listChartData.splice(239,268).forEach(el => {
       xCategories.push(moment.unix(el.t).format("YYYY-MM-DD"))
       // xCategories.push(el.t)
     });
-    let xCategoriesMap = xCategories.slice(239,268);
+    let xCategoriesMap = xCategories;
     // this.chartOptions.series = series;
     console.log(xCategoriesMap);
+    console.log(this.listChartData);
 
     this.chartOptions.xaxis = {
       categories: xCategoriesMap,
@@ -350,5 +351,13 @@ export class SymCandlechartComponent implements OnInit {
         }
       }
     };
+    // data.push(listChartData)
+    let data = this.listChartData.splice(50,100).map((item) => ({
+      x: moment.unix(item.t).format("YYYY-MM-DD"),
+      y: [item.o, item.h, item.l, item.c]
+    }))
+    console.log("formatted data", data);
+    console.log(this.chartOptions.series[0]);
+    this.chartOptions.series[0].data = data;
   }
 }
