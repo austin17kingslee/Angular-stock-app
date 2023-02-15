@@ -332,27 +332,26 @@ export class SymCandlechartComponent implements OnInit {
   }
 
   initCandleChart() {
-    const xCategories = [];
-    this.listChartData.splice(239,268).forEach(el => {
-      xCategories.push(moment.unix(el.t).format("YYYY-MM-DD"))
-      // xCategories.push(el.t)
-    });
-    let xCategoriesMap = xCategories;
+    // const xCategories = [];
+    // this.listChartData.splice(239,268).forEach(el => {
+    //   xCategories.push(moment.unix(el.t).format("YYYY-MM-DD"))
+    // });
+    // let xCategoriesMap = xCategories;
     // this.chartOptions.series = series;
-    console.log(xCategoriesMap);
-    console.log(this.listChartData);
+    // console.log(xCategoriesMap);
+    // console.log(this.listChartData);
 
-    this.chartOptions.xaxis = {
-      categories: xCategoriesMap,
-      type: "datetime",
-      labels: {
-        style: {
-          colors: "white"
-        }
-      }
-    };
+    // this.chartOptions.xaxis = {
+    //   categories: xCategoriesMap,
+    //   type: "datetime",
+    //   labels: {
+    //     style: {
+    //       colors: "white"
+    //     }
+    //   }
+    // };
     // data.push(listChartData)
-    let data = this.listChartData.splice(50,100).map((item) => ({
+    let data = this.listChartData.map((item) => ({
       x: moment.unix(item.t).format("YYYY-MM-DD"),
       y: [item.o, item.h, item.l, item.c]
     }))
