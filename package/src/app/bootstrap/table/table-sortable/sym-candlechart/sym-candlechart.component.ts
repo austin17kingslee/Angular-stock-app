@@ -8,6 +8,7 @@ import {
   ApexXAxis,
   ApexTitleSubtitle
 } from "ng-apexcharts";
+import * as moment from "moment";
 
 export type ChartOptions = {
   series?: ApexAxisChartSeries | any;
@@ -279,7 +280,10 @@ export class SymCandlechartComponent implements OnInit {
       ],
       chart: {
         type: "candlestick",
-        height: 350
+        height: 350,
+        toolbar: {
+          show: true
+        }
       },
       title: {
         text: "CandleStick Chart",
@@ -330,14 +334,21 @@ export class SymCandlechartComponent implements OnInit {
   initCandleChart() {
     const xCategories = [];
     this.listChartData.forEach(el => {
-      xCategories.push(new Date(el.t))
+      xCategories.push(moment.unix(el.t).format("YYYY-MM-DD"))
+      // xCategories.push(el.t)
     });
+    let xCategoriesMap = xCategories.slice(239,268);
     // this.chartOptions.series = series;
-      this.chartOptions.xaxis = {
-        categories: xCategories,
-        type: "datetime",
-      };
+    console.log(xCategoriesMap);
+
+    this.chartOptions.xaxis = {
+      categories: xCategoriesMap,
+      type: "datetime",
+      labels: {
+        style: {
+          colors: "white"
+        }
+      }
+    };
   }
-
-
 }

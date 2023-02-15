@@ -51,7 +51,7 @@ export class TableSortableComponent  {
 
   ngOnInit() {
     this.getNewStocks();
-    setInterval(() => this.getNewStocks(), 20000)
+    setInterval(() => this.getNewStocks(), 5000)
   }
 
   setDataChartDetails(from,to,sym){
@@ -74,7 +74,6 @@ export class TableSortableComponent  {
         t:this.chartDetailService.getT()[i],
         v:this.chartDetailService.getV()[i],
       })
-      console.log(this.listChartData)
     }
 
   }
@@ -118,7 +117,7 @@ export class TableSortableComponent  {
         setTimeout(() => {
           this.currentStocks = this.stocks;
           console.log("old stock",this.currentStocks);
-        }, 10000)
+        }, 4000)
 
         // // add class color
         // this.stocks = this.stocks.map(el => ({
