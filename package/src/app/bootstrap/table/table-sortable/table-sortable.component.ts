@@ -51,7 +51,7 @@ export class TableSortableComponent  {
 
   ngOnInit() {
     this.getNewStocks();
-    setInterval(() => this.getNewStocks(), 2000)
+    setInterval(() => this.getNewStocks(), 20000)
   }
 
   setDataChartDetails(from,to,sym){
@@ -61,7 +61,7 @@ export class TableSortableComponent  {
   }
    getDataChartDetails(){
      console.log(this.chartDetailService.getLengthData())
-     //format lại data thành dạng array of objects 
+     //format lại data thành dạng array of objects
      this.listChartData = []; //clear array trước khi set
     for (let i = 0 ; i < this.chartDetailService.getLengthData(); i++){
       this.listChartData.push({
@@ -118,7 +118,7 @@ export class TableSortableComponent  {
         setTimeout(() => {
           this.currentStocks = this.stocks;
           console.log("old stock",this.currentStocks);
-        }, 1000)
+        }, 10000)
 
         // // add class color
         // this.stocks = this.stocks.map(el => ({
