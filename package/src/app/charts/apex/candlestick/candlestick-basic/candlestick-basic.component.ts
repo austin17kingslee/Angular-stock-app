@@ -282,14 +282,27 @@ export class CandlestickBasicComponent implements OnInit {
       },
       title: {
         text: "CandleStick Chart",
-        align: "left"
+        align: "left",
+        style: {
+          color: "white"
+        }
       },
       xaxis: {
-        type: "datetime"
+        type: "datetime",
+        labels: {
+          style: {
+            colors: "white"
+          }
+        }
       },
       yaxis: {
         tooltip: {
           enabled: true
+        },
+        labels: {
+          style: {
+            colors: "white"
+          }
         }
       }
     };
