@@ -7,4 +7,8 @@ export class StockDetailService extends BaseService {
   getBaseInfo(sym: any): Observable<any[]> {
     return this.get('/getliststockbaseinfo/' + sym);
   }
+
+  getHisOrderMatching(sym: any): Observable<any[]> {
+    return this.get('/getliststocktrade/' + sym);
+  }
 }
