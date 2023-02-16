@@ -27,13 +27,13 @@ const fadeInOut = trigger('fadeInOut', [
 
 
 @Component({
-  selector: 'app-table-sortable',
-  templateUrl: './table-sortable.component.html',
-  styleUrls: ['./table-sortable.component.css'],
+  selector: 'app-table-sortable2',
+  templateUrl: './table-sortable2.component.html',
+  styleUrls: ['./table-sortable2.component.css'],
   providers: [TableService, StockDetailService],
   animations: [fadeInOut]
 })
-export class TableSortableComponent  {
+export class TableSortable2Component  {
   stocks: StockResponse[];
   sid: any = {};
   topMover: any[] = [];

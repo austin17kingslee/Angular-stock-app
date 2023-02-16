@@ -106,6 +106,7 @@ export class NavigationComponent implements OnInit {
          '/admin/ui-tooltip',
          '/admin/ui-typeahead',
          '/admin/ui-grid',
+         '/admin/stock-board',
 	];
 
     materialArray = [
