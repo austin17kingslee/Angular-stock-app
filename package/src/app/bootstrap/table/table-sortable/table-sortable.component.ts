@@ -1,11 +1,12 @@
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { TableService } from '../../../service/general-service/table-stocks.service';
-import { Component,  Directive, EventEmitter, Input, Output, QueryList, ViewChildren } from '@angular/core';
-import { StockDetailService } from 'src/app/service/general-service/stock-detail.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {trigger, state, style, transition, animate} from '@angular/animations';
+import {TableService} from '../../../service/general-service/table-stocks.service';
+import {Component, Directive, EventEmitter, Input, Output, QueryList, ViewChildren} from '@angular/core';
+import {StockDetailService} from 'src/app/service/general-service/stock-detail.service';
 import {ChartData, ChartService} from "../../../service/general-service/chart.service";
-import { Observable, forkJoin } from 'rxjs';
-import { StockResponse } from './stock-response.interface';
+import {Observable, forkJoin} from 'rxjs';
+import {StockResponse} from './stock-response.interface';
+import {StockRevenueService} from "../../../service/general-service/stock-revenue.service";
 
 const fadeInOut = trigger('fadeInOut', [
   state(
@@ -33,53 +34,63 @@ const fadeInOut = trigger('fadeInOut', [
   providers: [TableService, StockDetailService],
   animations: [fadeInOut]
 })
-export class TableSortableComponent  {
+export class TableSortableComponent {
   stocks: StockResponse[];
   sid: any = {};
   topMover: any[] = [];
   isVisible: boolean = false;
   selectedSym = "";
   stockDetail: any[] = [];
-  listChartData:ChartData[] =[];
+  listChartData: ChartData[] = [];
   currentStocks: StockResponse[];
 
   constructor(private tableService: TableService,
-    private modalService: NgbModal,
-    private stockDetailService: StockDetailService,
-    private chartDetailService: ChartService
-  ) { }
+              private modalService: NgbModal,
+              private stockDetailService: StockDetailService,
+              private chartDetailService: ChartService,
+              private stockRevenue: StockRevenueService,
+  ) {
+  }
 
   ngOnInit() {
+    console.error("dasfasdf")
+    this.stockRevenue.getStockRevenue("ABC");
     this.getNewStocks();
     setInterval(() => this.getNewStocks(), 5000)
   }
 
-  setDataChartDetails(from,to,sym){
+  setDataChartDetails(from, to, sym) {
     this.chartDetailService.setData(from, to, sym) //set biến param startTime, endTime, symbol để gọi api
     this.chartDetailService.getData(); //subscribe API, lấy data
     this.chartDetailService.getDataResponse(); // nhận data trả về
   }
-   getDataChartDetails(){
-     console.log(this.chartDetailService.getLengthData())
-     //format lại data thành dạng array of objects
-     this.listChartData = []; //clear array trước khi set
-    for (let i = 0 ; i < this.chartDetailService.getLengthData(); i++){
+
+  getDataChartDetails() {
+    console.log(this.chartDetailService.getLengthData())
+    //format lại data thành dạng array of objects
+    this.listChartData = []; //clear array trước khi set
+    for (let i = 0; i < this.chartDetailService.getLengthData(); i++) {
       this.listChartData.push({
-        s:this.chartDetailService.getS(),
-        symbol:this.chartDetailService.getSymbol(),
-        c:this.chartDetailService.getC()[i],
-        h:this.chartDetailService.getH()[i],
-        l:this.chartDetailService.getL()[i],
-        o:this.chartDetailService.getO()[i],
-        t:this.chartDetailService.getT()[i],
-        v:this.chartDetailService.getV()[i],
+        s: this.chartDetailService.getS(),
+        symbol: this.chartDetailService.getSymbol(),
+        c: this.chartDetailService.getC()[i],
+        h: this.chartDetailService.getH()[i],
+        l: this.chartDetailService.getL()[i],
+        o: this.chartDetailService.getO()[i],
+        t: this.chartDetailService.getT()[i],
+        v: this.chartDetailService.getV()[i],
       })
     }
 
   }
 
-  async getStockDetail(sym: any) {
-    this.stockDetailService.getBaseInfo(sym).subscribe((res:any) => {
+  async
+
+  getStockDetail(sym
+                   :
+                   any
+  ) {
+    this.stockDetailService.getBaseInfo(sym).subscribe((res: any) => {
       // console.log(res);
 
       this.stockDetail = res;
@@ -91,17 +102,21 @@ export class TableSortableComponent  {
     //   console.log('character', results[0]);
     //   console.log('characterHomeworld', results[1]);
     // });
-    this.setDataChartDetails(1639038571,1673166631,sym)
-   setTimeout(()=> this.getDataChartDetails(),100);
+    this.setDataChartDetails(1639038571, 1673166631, sym)
+    setTimeout(() => this.getDataChartDetails(), 100);
   }
 
-  getOldStocks(): void {
+  getOldStocks()
+    :
+    void {
     this.currentStocks = this.stocks;
   }
 
-  getNewStocks(): void {
+  getNewStocks()
+    :
+    void {
     this.tableService.getData()
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         this.stocks = res.map(el => ({
           ...el,
           g1: el.g1.split('|'),
@@ -113,10 +128,10 @@ export class TableSortableComponent  {
           g7: el.g7.split('|'),
           statusColor: this.toTextColor(el)
         }));
-        console.log("new stock",this.stocks);
+        console.log("new stock", this.stocks);
         setTimeout(() => {
           this.currentStocks = this.stocks;
-          console.log("old stock",this.currentStocks);
+          console.log("old stock", this.currentStocks);
         }, 4000)
 
         // // add class color
@@ -149,7 +164,10 @@ export class TableSortableComponent  {
       });
   }
 
-  toTextColor(data: any) {
+  toTextColor(data
+                :
+                any
+  ) {
     if (data.lastPrice == data.c) return 'stock-c' // khớp lệnh == trần => tím
     else if (data.lastPrice == data.f) return 'stock-f' // khớp lệnh == sàn => xanh dương
     else if (data.lastPrice == data.r) return 'stock-r' // khớp lệnh == t.c => vàng
@@ -157,7 +175,10 @@ export class TableSortableComponent  {
     else if (data.lastPrice < data.r) return 'status-d' // khớp lệnh < t.c => đỏ
   }
 
-  toStatusBackground(data: any) {
+  toStatusBackground(data
+                       :
+                       any
+  ) {
     // for (let i=0; i<currentList.length; i++) {
     //   currentList.map(el => ({
     //     ...el,
@@ -172,49 +193,58 @@ export class TableSortableComponent  {
     // }
     if (data == 'd') return 'background-color: #FF373A; color: white'
     else if (data == 'i') return 'background-color: #20FF00; color: white'
-    else if (data =='e') return 'background-color: none; color: none'
+    else if (data == 'e') return 'background-color: none; color: none'
   }
 
-  showModal(): void {
+  showModal()
+    :
+    void {
     this.isVisible = true;
   }
 
-  handleOk(): void {
+  handleOk()
+    :
+    void {
     console.log('Button ok clicked!');
     this.isVisible = false;
   }
 
-  handleCancel(): void {
+  handleCancel()
+    :
+    void {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
 
-  // onSort({column, direction}: SortEvent) {
+// onSort({column, direction}: SortEvent) {
 
-  //   // resetting other headers
-  //   this.headers.forEach(header => {
-  //     if (header.sortable !== column) {
-  //       header.direction = '';
-  //     }
-  //   });
+//   // resetting other headers
+//   this.headers.forEach(header => {
+//     if (header.sortable !== column) {
+//       header.direction = '';
+//     }
+//   });
 
-  //   // sorting countries
-  //   if (direction === '' || column === '') {
-  //     this.countries = COUNTRIES;
-  //   } else {
-  //     this.countries = [...COUNTRIES].sort((a, b) => {
-  //       const res = compare(a[column], b[column]);
-  //       return direction === 'asc' ? res : -res;
-  //     });
-  //   }
-  // }
+//   // sorting countries
+//   if (direction === '' || column === '') {
+//     this.countries = COUNTRIES;
+//   } else {
+//     this.countries = [...COUNTRIES].sort((a, b) => {
+//       const res = compare(a[column], b[column]);
+//       return direction === 'asc' ? res : -res;
+//     });
+//   }
+// }
 
-	open(modelId:any, data) {
+  open(modelId
+         :
+         any, data
+  ) {
     this.selectedSym = "";
     this.selectedSym = data;
     console.log(data);
-		this.modalService.open(modelId, {size: 'xl', centered: true});
+    this.modalService.open(modelId, {size: 'xl', centered: true});
     this.getStockDetail(this.selectedSym);
-	}
+  }
 
 }
