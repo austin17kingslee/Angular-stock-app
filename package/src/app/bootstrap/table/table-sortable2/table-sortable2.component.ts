@@ -27,20 +27,19 @@ const fadeInOut = trigger('fadeInOut', [
 
 
 @Component({
-  selector: 'app-table-sortable',
-  templateUrl: './table-sortable.component.html',
-  styleUrls: ['./table-sortable.component.css'],
+  selector: 'app-table-sortable2',
+  templateUrl: './table-sortable2.component.html',
+  styleUrls: ['./table-sortable2.component.css'],
   providers: [TableService, StockDetailService],
   animations: [fadeInOut]
 })
-export class TableSortableComponent  {
+export class TableSortable2Component  {
   stocks: StockResponse[];
   sid: any = {};
   topMover: any[] = [];
   isVisible: boolean = false;
   selectedSym = "";
   stockDetail: any[] = [];
-  hisOrderMatching: any[] = [];
   listChartData:ChartData[] =[];
   currentStocks: StockResponse[];
 
@@ -81,10 +80,9 @@ export class TableSortableComponent  {
 
   async getStockDetail(sym: any) {
     this.stockDetailService.getBaseInfo(sym).subscribe((res:any) => {
+      // console.log(res);
+
       this.stockDetail = res;
-    });
-    this.stockDetailService.getHisOrderMatching(sym).subscribe((res:any) => {
-      this.hisOrderMatching = res;
     });
     // const character = this.setDataChartDetails(1639038571,1673166631,sym);
     // const characterHomeworld = this.getDataChartDetails();
@@ -96,13 +94,6 @@ export class TableSortableComponent  {
     this.setDataChartDetails(1639038571,1673166631,sym)
    setTimeout(()=> this.getDataChartDetails(),100);
   }
-
-  // async getHisOrderMatching(sym: any) {
-  //   this.stockDetailService.getHisOrderMatching(sym).subscribe((res:any) => {
-  //     this.hisOrderMatching = res;
-  //   });
-  // //  setTimeout(()=> this.getDataChartDetails(),100);
-  // }
 
   getOldStocks(): void {
     this.currentStocks = this.stocks;
@@ -197,6 +188,26 @@ export class TableSortableComponent  {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
+
+  // onSort({column, direction}: SortEvent) {
+
+  //   // resetting other headers
+  //   this.headers.forEach(header => {
+  //     if (header.sortable !== column) {
+  //       header.direction = '';
+  //     }
+  //   });
+
+  //   // sorting countries
+  //   if (direction === '' || column === '') {
+  //     this.countries = COUNTRIES;
+  //   } else {
+  //     this.countries = [...COUNTRIES].sort((a, b) => {
+  //       const res = compare(a[column], b[column]);
+  //       return direction === 'asc' ? res : -res;
+  //     });
+  //   }
+  // }
 
 	open(modelId:any, data) {
     this.selectedSym = "";

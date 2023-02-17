@@ -1,3 +1,4 @@
+import { StockBoardComponent } from './stock-board/stock-board.component';
 import { AuthGuard } from './service/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -259,6 +260,8 @@ const routes: Routes = [
       {path: 'widget-basic', component: WidgetComponent},
       {path: 'form-element', component: ElementsComponent},
       {path: 'form-validate', component: FormValidateComponent},
+
+      {path: 'stock-board', component: StockBoardComponent},
     ]
   },
   {path: 'page-register', component: RegisterComponent},

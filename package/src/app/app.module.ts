@@ -717,6 +717,8 @@ import {
 import { SymGeneralComponent } from './bootstrap/table/table-sortable/sym-general/sym-general.component';
 import { SymCandlechartComponent } from './bootstrap/table/table-sortable/sym-candlechart/sym-candlechart.component';
 import { SymFinanceComponent } from './bootstrap/table/table-sortable/sym-finance/sym-finance.component';
+import { StockBoardComponent } from './stock-board/stock-board.component';
+import { TableSortable2Component } from './bootstrap/table/table-sortable2/table-sortable2.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -1017,6 +1019,7 @@ export function configServiceFactory(config: AppConfigService) {
     TableComponent,
     TableBasicComponent,
     TableSortableComponent,
+    TableSortable2Component,
     TableFilteringComponent,
     TablePaginationComponent,
     TableCompleteComponent,
@@ -1360,6 +1363,7 @@ export function configServiceFactory(config: AppConfigService) {
  SymGeneralComponent,
  SymCandlechartComponent,
  SymFinanceComponent,
+ StockBoardComponent,
 
 
   ],
